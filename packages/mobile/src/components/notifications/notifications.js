@@ -16,7 +16,7 @@ createNotificationListeners = async () => {
     /*
      * Triggered when a particular notification has been received in foreground
      * */
-    const notificationListener = firebase.notifications().onNotification((notification) => {
+    const notificationListener = await firebase.notifications().onNotification((notification) => {
         const {
             title,
             body
@@ -27,7 +27,7 @@ createNotificationListeners = async () => {
     /*
      * If your app is in background, you can listen for when a notification is clicked / tapped / opened as follows:
      * */
-    const notificationOpenedListener = firebase.notifications().onNotificationOpened((notificationOpen) => {
+    const notificationOpenedListener = await firebase.notifications().onNotificationOpened((notificationOpen) => {
         const {
             title,
             body
