@@ -10,5 +10,4 @@ target 'mobile' do
   pod 'Firebase/Messaging'
   pod 'RNFirebase', :path => '../node_modules/react-native-firebase/ios'
 
-
 end
