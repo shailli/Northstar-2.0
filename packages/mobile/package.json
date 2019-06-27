@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
-    "lint": "eslint *.js **/*.js"
+    "lint": "eslint *.js **/*.js --fix --no-ignore"
   },
   "dependencies": {
     "@react-native-community/cameraroll": "^1.1.1",
@@ -20,17 +20,17 @@
     "react-native-router-flux": "^4.0.6",
     "react-native-vector-icons": "^6.5.0",
     "react-navigation": "^3.11.0",
-    "shared": "*",
     "socket.io": "^2.2.0",
-    "socket.io-client": "^2.2.0"
+    "socket.io-client": "^2.2.0",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
+    "shared": "0.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
     "@babel/runtime": "^7.4.5",
     "babel-eslint": "^10.0.2",
     "babel-jest": "^24.8.0",
-    "enzyme": "^3.10.0",
-    "enzyme-adapter-react-16": "^1.14.0",
     "eslint": "^6.0.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-import": "^2.17.3",
@@ -44,7 +44,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm lint --fix --no-ignore && npm test"
+      "pre-commit": "npm run lint --no-ignore && npm run test"
     }
   },
   "jest": {
