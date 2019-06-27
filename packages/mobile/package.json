@@ -31,6 +31,9 @@
     "react-dom": "^16.8.6",
     "react-test-renderer": "16.8.3"
   },
+  "hooks": {
+    "pre-commit": "npm lint --fix --no-ignore"
+  },
   "jest": {
     "testPathIgnorePatterns": [
       "ios/*",
