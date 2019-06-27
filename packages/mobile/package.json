@@ -31,6 +31,14 @@
     "react-test-renderer": "16.8.3"
   },
   "jest": {
-    "preset": "react-native"
+    "preset": "react-native",
+    "testPathIgnorePatterns": [
+      "ios",
+      "node_modules"
+    ],
+    "modulePathIgnorePatterns": [
+      "ios",
+      "node_modules"
+    ]
   }
 }
