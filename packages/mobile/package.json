@@ -28,9 +28,11 @@
     "husky": "^2.5.0",
     "jest": "^24.8.0",
     "metro-react-native-babel-preset": "^0.54.1",
+    "react-dom": "^16.8.6",
     "react-test-renderer": "16.8.3"
   },
   "jest": {
-    "preset": "react-native"
+    "preset": "react-native",
+    "testPathIgnorePatterns" : ["ios/", "<rootDir>/ios/" ]
   }
 }
