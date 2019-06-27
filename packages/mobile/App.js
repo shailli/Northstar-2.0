@@ -12,25 +12,24 @@ import React, { useState, useEffect } from 'react';
 import {
   StyleSheet, Text, View, TouchableOpacity, AsyncStorage, ScrollView
 } from 'react-native';
-import {Router, Scene} from 'react-native-router-flux';
+import { Router, Scene } from 'react-native-router-flux';
 import Chat from './src/components/chatlanding/chat';
 import Camera from './src/components/chatlanding/camara';
 import FileSystem from './src/components/chatlanding/files';
 
-class App extends React.Component {
-
-  render() {
-    return (<Router>
+const App = () => {
+    return (
+    <Router>
       <Scene key="root">
         <Scene key="chat" component={Chat} title="Chat" initial hideBackImage={true}></Scene>
         <Scene key="camera" component={Camera} title="Camera" hideBackImage={true}></Scene>
         <Scene key="files" component={FileSystem} title="FileSystem" hideBackImage={true}></Scene>
       </Scene>
-    </Router>);
-  }
+    </Router>
+);
 }
 
-export default App; 
+export default App;
 
 const styles = StyleSheet.create({
   container: {
