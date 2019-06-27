@@ -10,13 +10,16 @@
 
 import React, { useState, useEffect } from 'react';
 import {
-  StyleSheet, Text, View, TouchableOpacity, AsyncStorage
+  StyleSheet, Text, View, TouchableOpacity, AsyncStorage,ScrollView
 } from 'react-native';
+import { createSwitchNavigator, createStackNavigator, createAppContainer} from 'react-navigation';
 import firebase from 'react-native-firebase';
-import { background } from 'shared';
-
-export default function App() {
+import ChatHeader from './src/components/chatlanding/header';
+import ChatFooter from './src/components/chatlanding/chatfooter';
+import ChatBody from './src/components/chatlanding/chatbody';
+export default App=()=>{
   const [count, setCount] = useState(0);
+  
   checkPermission = async () => {
     const enabled = await firebase.messaging().hasPermission();
     if (enabled) {
@@ -95,22 +98,20 @@ export default function App() {
     checkPermission();
   }, []);
   return (
-    <View style={[background, styles.container]}>
-      <Text style={styles.welcome}>
-        You clicked
-        {count}
-        times
-      </Text>
-      <TouchableOpacity onPress={() => setCount(count + 1)}><Text>Click me</Text></TouchableOpacity>
+    <View style={styles.container}>
+      <ChatHeader></ChatHeader>
+        <ScrollView>
+          <ChatBody></ChatBody>
+        </ScrollView>
+      <ChatFooter></ChatFooter>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    height: '100%',
+    flex:1
   },
   welcome: {
     fontSize: 20,
@@ -121,5 +122,5 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#333333',
     marginBottom: 5,
-  },
+  }
 });
