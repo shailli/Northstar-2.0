@@ -11,10 +11,10 @@ const path = require('path');
 // react-native >= 0.57
 
 const extraNodeModules = {
-  'shared': path.resolve(__dirname + '/../shared/'),
+  shared: path.resolve(`${__dirname}/../shared/`),
 };
 const watchFolders = [
-  path.resolve(__dirname + '/../shared/')
+  path.resolve(`${__dirname}/../shared/`)
 ];
 
 module.exports = {
