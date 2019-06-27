@@ -10,22 +10,13 @@
 
 import React, { useState, useEffect } from 'react';
 import {
-  StyleSheet, Text, View, TouchableOpacity, AsyncStorage
+  StyleSheet, Text, View, TouchableOpacity
 } from 'react-native';
-import { checkPermission } from './src/components/notifications/notifications';
 import { background } from 'shared';
+import { checkPermission } from './src/components/notifications/notifications';
 
 export default function App() {
   const [count, setCount] = useState(0);
-  showAlert = (title, body) => {
-    Alert.alert(
-      title, body,
-      [
-          { text: 'OK', onPress: () => console.log('OK Pressed') },
-      ],
-      { cancelable: false },
-    );
-  }
   // Similar to componentDidMount:
   useEffect(() => {
     // Update the document title using the browser API
