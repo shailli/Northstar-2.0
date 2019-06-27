@@ -8,6 +8,7 @@ target 'mobile' do
   # Pods for ReactPushNotifications - Add these lines
   pod 'Firebase/Core'
   pod 'Firebase/Messaging'
+  pod 'RNFirebase', :path => '../node_modules/react-native-firebase/ios'
 
 
 end
