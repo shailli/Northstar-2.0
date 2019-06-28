@@ -40,7 +40,7 @@ socket:io.connect('http://192.168.0.7:8080')}
   }
 }
 
-export default App;
+export default App; 
 
 const styles = StyleSheet.create({
   container: {
