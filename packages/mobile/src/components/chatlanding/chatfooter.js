@@ -2,12 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Text, StyleSheet, View, TextInput,TouchableHighlight,Image} from 'react-native';
 import { Icon } from 'react-native-elements';
 
-const ChatFooter = () => {
+const ChatFooter = (props) => {
     let [text, setText] = useState();
     return (
         <View style={styles.footerContainer}>
             <TextInput style={styles.InputBox} type="text" placeholder="Type a message" value={text} onChangeText={setMessage}/>
-            {console.log(text)}
             <TouchableHighlight style={{ height:'100%',width:40,position:'absolute',right:'5%'}} onPress={() => { this._fetchResults() }} underlayColor='transparent'>
                     <Icon style={styles.button}
                         raised
@@ -22,6 +21,8 @@ const ChatFooter = () => {
     );
     function sendMessage(){
         console.log(text);
+        // props.setTextMessage(text);
+        props.socket.emit('chat-client',{message:text,name:'user1'});
         setText('');
     }
     function setMessage(text){

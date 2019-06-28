@@ -10,45 +10,42 @@
 
 import React, { useState, useEffect } from 'react';
 import {
-  StyleSheet, Text, View, TouchableOpacity, AsyncStorage,ScrollView
+  StyleSheet, Text, View, TouchableOpacity, AsyncStorage, ScrollView
 } from 'react-native';
 import { checkPermission } from './src/components/notifications/notifications';
 import ChatHeader from './src/components/chatlanding/header';
 import ChatFooter from './src/components/chatlanding/chatfooter';
 import ChatBody from './src/components/chatlanding/chatbody';
+import io from 'socket.io-client';
 
-export default function App() {
-  const [count, setCount] = useState(0);
-  showAlert = (title, body) => {
-    Alert.alert(
-      title, body,
-      [
-          { text: 'OK', onPress: () => console.log('OK Pressed') },
-      ],
-      { cancelable: false },
-    );
+class App extends React.Component {
+state={message:'',
+data:[{name:'user1',message:'hello'},{name:'user2',message:'hi, how are you'}],
+socket:io.connect('http://192.168.0.7:8080')}
+
+  componentDidMount() {
+    this.state.socket.on('chat-server',msg=>{
+      this.setState({data:[...this.state.data,msg]})
+    })
   }
-  // Similar to componentDidMount:
-  useEffect(() => {
-    // Update the document title using the browser API
-    setCount(count + 1);
-    checkPermission();
-  }, []);
-  return (
-    <View style={styles.container}>
+
+  render() {
+    return (<View style={styles.container}>
       <ChatHeader></ChatHeader>
-        <ScrollView>
-          <ChatBody></ChatBody>
-        </ScrollView>
-      <ChatFooter></ChatFooter>
-    </View>
-  );
+      <ScrollView>
+        <ChatBody  data={this.state.data}></ChatBody>
+      </ScrollView>
+      <ChatFooter setTextMessage={(message) =>this.setState({message})} socket={this.state.socket}></ChatFooter>
+    </View>);
+  }
 }
+
+export default App;
 
 const styles = StyleSheet.create({
   container: {
     height: '100%',
-    flex:1
+    flex: 1
   },
   welcome: {
     fontSize: 20,
