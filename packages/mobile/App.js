@@ -20,13 +20,20 @@ import io from 'socket.io-client';
 
 class App extends React.Component {
 state={message:'',
-data:[{name:'user1',message:'hello'},{name:'user2',message:'hi, how are you'}],
+data:[{userId:'user1',message:'hello'},{userId:'user2',message:'hi, how are you'}],
 socket:io.connect('http://192.168.0.7:8080')}
 
   componentDidMount() {
+    this.state.socket.emit('user-join');
+    
+    this.state.socket.on('user-history-chat',(data)=>{
+      this.setState({data});
+    });
+
     this.state.socket.on('chat-server',msg=>{
       this.setState({data:[...this.state.data,msg]})
     })
+    checkPermission();
   }
 
   render() {

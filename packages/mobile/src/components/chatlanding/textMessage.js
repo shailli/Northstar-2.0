@@ -2,16 +2,16 @@ import React from 'react';
 import { Text, StyleSheet, View} from 'react-native';
 
 const TextMessage = (props) => {
-    const user="user1";
+    const userId="user1";
     return (
 
             <View style={[styles.conent,checkUser(props.data)]}>
-                <Text style={styles.name}>{props.data.name}:</Text>
+                <Text style={styles.name}>{props.data.userId}:</Text>
                 <Text style={styles.message}>{props.data.message}</Text>
             </View>
     );
     function checkUser(data){
-        if(data.name==user)
+        if(data.userId==userId)
         return styles.ownText;
         else 
         return styles.otherText;
