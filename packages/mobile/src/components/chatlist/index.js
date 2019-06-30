@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { ScrollView } from 'react-native';
 import ListItem from './components/ListItem';
 
 const DataList = [
@@ -9,9 +9,9 @@ const DataList = [
         message: 'Test Message'
     },
     {
-        name: 'Abhishek',
+        name: 'Sergio Ramos',
         photo: '',
-        message: 'Test Message'
+        message: 'Test Message Test MessageTest MessageTest Message'
     },
     {
         name: 'Abhishek',
@@ -26,9 +26,9 @@ const DataList = [
 ];
 const ChatListing = () => {
     return (
-        <View>
-            {DataList.map(item=><ListItem name={item.name} />)}
-        </View>
+        <ScrollView>
+            {DataList.map((item, index)=><ListItem key={index} data={item} />)}
+        </ScrollView>
     );
 }
 
