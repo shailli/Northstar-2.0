@@ -47,9 +47,5 @@
     "hooks": {
       "pre-commit": "npm run lint --no-ignore && npm run test"
     }
-  },
-  "jest": {
-    "preset": "react-native",
-    "testPathIgnorePatterns" : ["ios/", "<rootDir>/ios/" ]
   }
 }
