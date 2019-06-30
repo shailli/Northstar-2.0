@@ -18,6 +18,7 @@ import com.reactnativedocumentpicker.ReactNativeDocumentPicker;
 
 import java.util.Arrays;
 import java.util.List;
+import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -38,7 +39,8 @@ public class MainApplication extends Application implements ReactApplication {
           new CameraRollPackage(),
           new RNCameraPackage(),
           new RNFirebaseStoragePackage(),
-          new ReactNativeDocumentPicker()
+          new ReactNativeDocumentPicker(),
+          new RNGestureHandlerPackage()
       );
     }
 

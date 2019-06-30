@@ -48,3 +48,9 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   }
 });
+
+export default createAppContainer(createSwitchNavigator({
+  Root: RootStack,
+}, {
+  initialRouteName: 'Root',
+}));
