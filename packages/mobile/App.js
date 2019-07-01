@@ -17,7 +17,8 @@ import Chat from './src/components/chatlanding/chat';
 import Camera from './src/components/chatlanding/camara';
 import FileSystem from './src/components/chatlanding/files';
 
-const App = () => {
+export default function App() {
+  useEffect(() => {
     return (
     <Router>
       <Scene key="root">
