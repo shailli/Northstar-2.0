@@ -27,5 +27,14 @@
 	"modulePathIgnorePatterns": [
 		"ios/*",
 		"node_modules/*"
-	]
+	],
+    "testMatch": [
+		"**/?(*.)test.js?(x)"
+    ],
+    "snapshotSerializers": [
+		"enzyme-to-json/serializer"
+    ],
+    "setupFiles": [
+		"<rootDir>/jest/setup.js"
+    ]
 }

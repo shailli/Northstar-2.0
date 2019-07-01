@@ -3,9 +3,9 @@ import {
     StyleSheet, Text, View, TouchableOpacity, TextInput, Button
 } from 'react-native';
 export default function Login() {
-    const [userName, setUserName] = useState('');
-    const [password, setPassword] = useState('');
-    const [isLoggedIn, setIsLoggedin] = useState(false);
+  const [userName, setUserName] = useState('');
+  const [password, setPassword] = useState('');
+  const [isLoggedIn, setIsLoggedin] = useState(false);
 
     handleUserIdChange = (name) => {
         setUserName(name)
@@ -18,9 +18,9 @@ export default function Login() {
             setIsLoggedin(true);
         }
     }
-
+    
     return (
-        <View>
+      <View>
             <TextInput 
                 placeholder="Username"
                 onChangeText={this.handleUserIdChange}
@@ -41,4 +41,5 @@ export default function Login() {
             />
         </View>
     );
-}
+};
+  
