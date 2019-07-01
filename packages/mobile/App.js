@@ -12,38 +12,19 @@ import React, { useState, useEffect } from 'react';
 import {
   StyleSheet, Text, View, TouchableOpacity, AsyncStorage, ScrollView
 } from 'react-native';
-import { checkPermission } from './src/components/notifications/notifications';
-import ChatHeader from './src/components/chatlanding/header';
-import ChatFooter from './src/components/chatlanding/chatfooter';
-import ChatBody from './src/components/chatlanding/chatbody';
-import io from 'socket.io-client';
+import {Router, Scene} from 'react-native-router-flux';
+import Chat from './src/components/chatlanding/chat';
+import Camera from './src/components/chatlanding/camara';
 
 class App extends React.Component {
-state={message:'',
-data:[{userId:'user1',message:'hello'},{userId:'user2',message:'hi, how are you'}],
-socket:io.connect('http://192.168.0.7:8080')}
-
-  componentDidMount() {
-    this.state.socket.emit('user-join');
-    
-    this.state.socket.on('user-history-chat',(data)=>{
-      this.setState({data});
-    });
-
-    this.state.socket.on('chat-server',msg=>{
-      this.setState({data:[...this.state.data,msg]})
-    })
-    checkPermission();
-  }
 
   render() {
-    return (<View style={styles.container}>
-      <ChatHeader></ChatHeader>
-      <ScrollView>
-        <ChatBody  data={this.state.data}></ChatBody>
-      </ScrollView>
-      <ChatFooter setTextMessage={(message) =>this.setState({message})} socket={this.state.socket}></ChatFooter>
-    </View>);
+    return (<Router>
+      <Scene key="root">
+        <Scene key="chat" component={Chat} title="Chat" initial></Scene>
+        <Scene key="camera" component={Camera} title="Camera" ></Scene>
+      </Scene>
+    </Router>);
   }
 }
 

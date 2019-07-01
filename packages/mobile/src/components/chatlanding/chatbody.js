@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, StyleSheet, View, TextInput, TouchableHighlight, ImageBackground } from 'react-native';
+import { Text, StyleSheet, View, TextInput, TouchableHighlight, ImageBackground ,Image} from 'react-native';
 import TextMessage from './textMessage';
 
 const ChatBody = (props) => {
@@ -17,6 +17,14 @@ const ChatBody = (props) => {
     return (
         <ImageBackground source={require('../../../assets/background.png')} style={styles.bodyContainer}>
             {props.data.map(item=><TextMessage data={item}></TextMessage>)}
+            {props.imagedata?
+            <View>
+                <Image
+                style={styles.image}
+                source={{uri:"data:image/jpeg;base64,"+props.imagedata}}
+               />
+            </View>
+            :<View></View>}
         </ImageBackground>
     );
 }
@@ -24,5 +32,17 @@ const ChatBody = (props) => {
 export default ChatBody;
 
 const styles = StyleSheet.create({
-    bodyContainer: { width: '100%', height: 610, flex: 1, resizeMode: 'cover' },    
+    bodyContainer: { width: '100%', height: 610, flex: 1, resizeMode: 'cover' },  
+    image:{
+        width:'40%',
+        height:'100%',
+        alignSelf: 'flex-end',
+        height:80,
+        margin:5
+    },
+    imageData:{
+        backgroundColor:'red',
+        height:85,
+        padding:5
+    }
 })
