@@ -14,6 +14,7 @@ import {
 } from 'react-native';
 import { background } from 'shared';
 import { checkPermission } from './src/components/notifications/notifications';
+import Login from './src/components/login';
 
 export default function App() {
   const [count, setCount] = useState(0);
@@ -25,12 +26,7 @@ export default function App() {
   }, []);
   return (
     <View style={[background, styles.container]}>
-      <Text style={styles.welcome}>
-        You clicked
-        {count}
-        times
-      </Text>
-      <TouchableOpacity onPress={() => setCount(count + 1)}><Text>Click me</Text></TouchableOpacity>
+      <Login />
     </View>
   );
 }
