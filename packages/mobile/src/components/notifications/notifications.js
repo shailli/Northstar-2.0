@@ -3,7 +3,7 @@ import { AsyncStorage } from 'react-native';
 import firebase from 'react-native-firebase';
 import axios from 'axios';
 
-export async function checkPermission () {
+export async function checkPermission() {
     const enabled = await firebase.messaging().hasPermission();
     if (enabled) {
         getToken();
@@ -15,46 +15,37 @@ export async function checkPermission () {
 
 createNotificationListeners = async () => {
     /*
-     * Triggered when a particular notification has been received in foreground
-     * */
-    const notificationListener = await firebase.notifications().onNotification((notification) => {
-        const {
-            title,
-            body
-        } = notification;
+   * Triggered when a particular notification has been received in foreground
+   * */
+    const notificationListener = await firebase.notifications().onNotification(notification => {
+        const { title, body } = notification;
         showAlert(title, body);
     });
 
     /*
-     * If your app is in background, you can listen for when a notification is clicked / tapped / opened as follows:
-     * */
-    const notificationOpenedListener = await firebase.notifications().onNotificationOpened((notificationOpen) => {
-        const {
-            title,
-            body
-        } = notificationOpen.notification;
+   * If your app is in background, you can listen for when a notification is clicked / tapped / opened as follows:
+   * */
+    const notificationOpenedListener = await firebase.notifications().onNotificationOpened(notificationOpen => {
+        const { title, body } = notificationOpen.notification;
         showAlert(title, body);
     });
 
     /*
-     * If your app is closed, you can check if it was opened by a notification being clicked / tapped / opened as follows:
-     * */
+   * If your app is closed, you can check if it was opened by a notification being clicked / tapped / opened as follows:
+   * */
     const notificationOpen = await firebase.notifications().getInitialNotification();
     if (notificationOpen) {
-        const {
-            title,
-            body
-        } = notificationOpen.notification;
+        const { title, body } = notificationOpen.notification;
         showAlert(title, body);
     }
     /*
-     * Triggered for data only payload in foreground
-     * */
-    const messageListener = firebase.messaging().onMessage((message) => {
-        //process data message
-        console.log(JSON.stringify(message));
+   * Triggered for data only payload in foreground
+   * */
+    const messageListener = firebase.messaging().onMessage(message => {
+    //process data message
+    // console.log(JSON.stringify(message))
     });
-}
+};
 
 getToken = async () => {
     let fcmToken = await AsyncStorage.getItem('fcmToken');
@@ -64,18 +55,19 @@ getToken = async () => {
             // user has a device token
             console.log(fcmToken);
             axios({
-                method:"post",
+                method:'post',
                 url:'http://10.10.80.237:8080/api/registerdevice',
                 data:{
                     userName:'Ganapati',
                     deviceId:fcmToken
-                }})
-            .then(res=>console.log(res)).catch(err=>console.log(err))
+                }
+            })
+                .then(res=>console.log(res)).catch(err=>console.log(err))
             await AsyncStorage.setItem('fcmToken', fcmToken);
         }
     }
     
-    console.log("External FCMTOKEN",fcmToken);
+    console.log('External FCMTOKEN',fcmToken);
 }
 requestPermission = async () => {
     try {
@@ -83,7 +75,7 @@ requestPermission = async () => {
         // User has authorised
         getToken();
     } catch (error) {
-        // User has rejected permissions
-        console.log('permission rejected');
+    // User has rejected permissions
+    // console.log('permission rejected')
     }
-}
+};

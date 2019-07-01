@@ -7,7 +7,6 @@ import loginStyles from './loginStyles'
 
 
 export default function Login() {
-    console.log("loginStyle",text.center)
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
     const [isLoggedIn, setIsLoggedin] = useState(false);
@@ -19,18 +18,16 @@ export default function Login() {
         setPassword(password)
     }
     submitclick = () => {
-        if ((userName == "krishankantsinghal") && (password == "krishankant123")) {
+        if ((userName == 'krishankantsinghal') && (password == 'krishankant123')) {
             setIsLoggedin(true);
         }
     }
     checkAuth = () => {
         fetchProfiles()
-        .then( (data) => {
-          let results = data.results;
-          this.setState({
-            profiles: results
-          });
-        });
+            .then( (data) => {
+                let results = data.results;
+                this.setState({profiles: results});
+            });
     };
 
     return (
@@ -61,4 +58,5 @@ export default function Login() {
             </TouchableOpacity>
         </View>
     );
-}
+};
+  
