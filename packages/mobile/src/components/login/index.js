@@ -11,8 +11,15 @@ export default function Login() {
     const [password, setPassword] = useState('');
     const [isLoggedIn, setIsLoggedin] = useState(false);
 
-    handleUserIdChange = (name) => {
-        setUserName(name)
+  handleUserIdChange = name => {
+    setUserName(name);
+  };
+  handlePasswordChange = password => {
+    setPassword(password);
+  };
+  submitclick = () => {
+    if (userName == 'krishankantsinghal' && password == 'krishankant123') {
+      setIsLoggedin(true);
     }
     handlePasswordChange = (password) => {
         setPassword(password)
