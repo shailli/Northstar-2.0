@@ -13,6 +13,7 @@ import com.facebook.soloader.SoLoader;
 
 import java.util.Arrays;
 import java.util.List;
+import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -28,7 +29,8 @@ public class MainApplication extends Application implements ReactApplication {
           new MainReactPackage(),
           new RNFirebasePackage(),
           new RNFirebaseMessagingPackage(),
-          new RNFirebaseNotificationsPackage()
+          new RNFirebaseNotificationsPackage(),
+          new RNGestureHandlerPackage()
       );
     }
 

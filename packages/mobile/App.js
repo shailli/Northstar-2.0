@@ -8,47 +8,43 @@
 
 /* eslint-disable import/no-unresolved */
 
-import React, { useState, useEffect } from 'react';
-import {
-  StyleSheet, Text, View, TouchableOpacity
-} from 'react-native';
-import { background } from 'shared';
+import React, { useEffect } from 'react';
+import { createSwitchNavigator, createStackNavigator, createAppContainer } from 'react-navigation';
+import { View } from 'react-native';
+import { primary } from 'shared';
 import { checkPermission } from './src/components/notifications/notifications';
+import Login from './src/components/login';
 
-export default function App() {
-  const [count, setCount] = useState(0);
+const App = () => {
   // Similar to componentDidMount:
   useEffect(() => {
-    // Update the document title using the browser API
-    setCount(count + 1);
     checkPermission();
   }, []);
   return (
     <View style={[background, styles.container]}>
-      <Text style={styles.welcome}>
-        You clicked
-        {count}
-        times
-      </Text>
-      <TouchableOpacity onPress={() => setCount(count + 1)}><Text>Click me</Text></TouchableOpacity>
+      <Login />
     </View>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+const RootStack = createStackNavigator({
+  ChatListing: {
+    screen: App,
+    navigationOptions: () => ({
+      headerTitleStyle: { fontSize: 18 },
+      headerTintColor: '#fff',
+      headerStyle: {
+        backgroundColor: primary.color,
+      },
+      title: 'NorthStar',
+    }),
+  }
+}, {
+  initialRouteName: 'ChatListing',
 });
+
+export default createAppContainer(createSwitchNavigator({
+  Root: RootStack,
+}, {
+  initialRouteName: 'Root',
+}));
