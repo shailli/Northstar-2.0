@@ -10,7 +10,7 @@
 
 import React, { useState, useEffect } from 'react';
 import {
-  StyleSheet, Text, View, TouchableOpacity
+  StyleSheet, View,
 } from 'react-native';
 import { background } from 'shared';
 import { checkPermission } from './src/components/notifications/notifications';
