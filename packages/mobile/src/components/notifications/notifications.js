@@ -61,6 +61,7 @@ getToken = async () => {
         fcmToken = await firebase.messaging().getToken();
         if (fcmToken) {
             // user has a device token
+            //Call register notification api
             await AsyncStorage.setItem('fcmToken', fcmToken);
         }
     }

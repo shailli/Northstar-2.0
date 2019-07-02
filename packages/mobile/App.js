@@ -21,8 +21,8 @@ class App extends React.Component {
   render() {
     return (<Router>
       <Scene key="root">
-        <Scene key="chat" component={Chat} title="Chat" initial></Scene>
-        <Scene key="camera" component={Camera} title="Camera" ></Scene>
+        <Scene key="chat" component={Chat} title="Chat" initial hideBackImage={true}></Scene>
+        <Scene key="camera" component={Camera} title="Camera" hideBackImage={true}></Scene>
       </Scene>
     </Router>);
   }

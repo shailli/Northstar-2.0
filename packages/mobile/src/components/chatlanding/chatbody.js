@@ -16,15 +16,11 @@ const ChatBody = (props) => {
 
     return (
         <ImageBackground source={require('../../../assets/background.png')} style={styles.bodyContainer}>
-            {props.data.map(item=><TextMessage data={item}></TextMessage>)}
-            {props.imagedata?
-            <View>
-                <Image
-                style={styles.image}
-                source={{uri:"data:image/jpeg;base64,"+props.imagedata}}
-               />
-            </View>
-            :<View></View>}
+            {props.data.map(item=>
+                {item.isImage? <Image style={styles.image}
+                source={{uri:"data:image/jpeg;base64,"+item.message}}
+               />:<TextMessage data={item}></TextMessage>}
+            )}
         </ImageBackground>
     );
 }

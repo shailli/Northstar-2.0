@@ -21,7 +21,7 @@ import io from 'socket.io-client';
 class Chat extends React.Component {
 state={message:'',
 data:[{userId:'user1',message:'hello'},{userId:'user2',message:'hi, how are you'}],
-socket:io.connect('http://192.168.1.6:8080')}
+socket:io.connect('http://10.10.80.88:8080')}
 
   componentDidMount() {
     this.state.socket.emit('user-join');
@@ -37,11 +37,10 @@ socket:io.connect('http://192.168.1.6:8080')}
   }
 
   render() {
-      let image=this.props.camaraImage;
     return (<View style={styles.container}>
       <ChatHeader ></ChatHeader>
       <ScrollView>
-        <ChatBody  data={this.state.data} imagedata={image}></ChatBody>
+        <ChatBody  data={this.state.data}></ChatBody>
       </ScrollView>
       <ChatFooter setTextMessage={(message) =>this.setState({message})} socket={this.state.socket}></ChatFooter>
     </View>);
