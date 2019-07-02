@@ -1,27 +1,19 @@
 import React, { useState } from 'react';
-import {
-    StyleSheet, Text, View, TouchableOpacity, TextInput, Button
-} from 'react-native';
-import fetchLogin from '../../../../shared/api/login'
-import loginStyles from './loginStyles'
-
-
+import { StyleSheet, Text, View, TouchableOpacity, TextInput, Button } from 'react-native';
 export default function Login() {
-    console.log("loginStyle",text.center)
-    const [userName, setUserName] = useState('');
-    const [password, setPassword] = useState('');
-    const [isLoggedIn, setIsLoggedin] = useState(false);
+  const [userName, setUserName] = useState('');
+  const [password, setPassword] = useState('');
+  const [isLoggedIn, setIsLoggedin] = useState(false);
 
-    handleUserIdChange = (name) => {
-        setUserName(name)
-    }
-    handlePasswordChange = (password) => {
-        setPassword(password)
-    }
-    submitclick = () => {
-        if ((userName == "krishankantsinghal") && (password == "krishankant123")) {
-            setIsLoggedin(true);
-        }
+  handleUserIdChange = name => {
+    setUserName(name);
+  };
+  handlePasswordChange = password => {
+    setPassword(password);
+  };
+  submitclick = () => {
+    if (userName == 'krishankantsinghal' && password == 'krishankant123') {
+      setIsLoggedin(true);
     }
     checkAuth = () => {
         fetchProfiles()
