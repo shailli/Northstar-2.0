@@ -1,6 +1,7 @@
 // Functions used for Firebase Notifications are stored here
 import { AsyncStorage } from 'react-native';
 import firebase from 'react-native-firebase';
+import axios from 'axios';
 
 export async function checkPermission () {
     const enabled = await firebase.messaging().hasPermission();
@@ -61,10 +62,20 @@ getToken = async () => {
         fcmToken = await firebase.messaging().getToken();
         if (fcmToken) {
             // user has a device token
-            //Call register notification api
+            console.log(fcmToken);
+            axios({
+                method:"post",
+                url:'http://10.10.80.237:8080/api/registerdevice',
+                data:{
+                    userName:'Ganapati',
+                    deviceId:fcmToken
+                }})
+            .then(res=>console.log(res)).catch(err=>console.log(err))
             await AsyncStorage.setItem('fcmToken', fcmToken);
         }
     }
+    
+    console.log("External FCMTOKEN",fcmToken);
 }
 requestPermission = async () => {
     try {

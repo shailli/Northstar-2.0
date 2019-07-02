@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@react-native-community/cameraroll": "^1.1.1",
+    "axios": "^0.19.0",
     "react": "16.8.3",
     "react-native": "0.59.9",
     "react-native-camera": "^2.11.0",
