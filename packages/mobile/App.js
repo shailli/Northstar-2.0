@@ -11,7 +11,7 @@
 import React, { useEffect } from 'react';
 import { createSwitchNavigator, createStackNavigator, createAppContainer } from 'react-navigation';
 import { View } from 'react-native';
-import { primary } from 'shared';
+import { primary, background } from 'shared';
 import { checkPermission } from './src/components/notifications/notifications';
 import Login from './src/components/login';
 
@@ -21,30 +21,38 @@ const App = () => {
     checkPermission();
   }, []);
   return (
-    <View style={[background, styles.container]}>
+    <View style={[background]}>
       <Login />
     </View>
   );
 };
 
-const RootStack = createStackNavigator({
-  ChatListing: {
-    screen: App,
-    navigationOptions: () => ({
-      headerTitleStyle: { fontSize: 18 },
-      headerTintColor: '#fff',
-      headerStyle: {
-        backgroundColor: primary.color,
-      },
-      title: 'NorthStar',
-    }),
-  }
-}, {
-  initialRouteName: 'ChatListing',
-});
+const RootStack = createStackNavigator(
+  {
+    ChatListing: {
+      screen: App,
+      navigationOptions: () => ({
+        headerTitleStyle: { fontSize: 18 },
+        headerTintColor: '#fff',
+        headerStyle: {
+          backgroundColor: primary.color,
+        },
+        title: 'NorthStar',
+      }),
+    },
+  },
+  {
+    initialRouteName: 'ChatListing',
+  },
+);
 
-export default createAppContainer(createSwitchNavigator({
-  Root: RootStack,
-}, {
-  initialRouteName: 'Root',
-}));
+export default createAppContainer(
+  createSwitchNavigator(
+    {
+      Root: RootStack,
+    },
+    {
+      initialRouteName: 'Root',
+    },
+  ),
+);
