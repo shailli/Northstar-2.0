@@ -1,73 +1,79 @@
 // Functions used for Firebase Notifications are stored here
-import { AsyncStorage } from 'react-native';
+import { AsyncStorage, Alert } from 'react-native';
 import firebase from 'react-native-firebase';
 import axios from 'axios';
 
 export async function checkPermission() {
-    const enabled = await firebase.messaging().hasPermission();
-    if (enabled) {
-        getToken();
-    } else {
-        requestPermission();
-        createNotificationListeners();
-    }
+  const enabled = await firebase.messaging().hasPermission();
+  if (enabled) {
+    getToken();
+    createNotificationListeners();
+  } else {
+    requestPermission();
+    createNotificationListeners();
+  }
 }
 
-createNotificationListeners = async () => {
-    /*
+async function createNotificationListeners() {
+  /*
    * Triggered when a particular notification has been received in foreground
    * */
-    const notificationListener = await firebase.notifications().onNotification(notification => {
-        const { title, body } = notification;
-        showAlert(title, body);
-    });
+  firebase.notifications().onNotification(function(notification) {
+    const { title, body } = notification;
+    showAlert(title, body);
+  });
 
     /*
    * If your app is in background, you can listen for when a notification is clicked / tapped / opened as follows:
    * */
-    const notificationOpenedListener = await firebase.notifications().onNotificationOpened(notificationOpen => {
-        const { title, body } = notificationOpen.notification;
-        showAlert(title, body);
-    });
+  firebase.notifications().onNotificationOpened(function(notificationOpen) {
+    const { title, body } = notificationOpen.notification;
+    showAlert(title, body);
+  });
 
     /*
    * If your app is closed, you can check if it was opened by a notification being clicked / tapped / opened as follows:
    * */
-    const notificationOpen = await firebase.notifications().getInitialNotification();
-    if (notificationOpen) {
-        const { title, body } = notificationOpen.notification;
-        showAlert(title, body);
-    }
-    /*
+  let notificationOpen;
+  notificationOpen = await firebase.notifications().getInitialNotification();
+  if (notificationOpen) {
+    const { title, body } = notificationOpen.notification;
+    showAlert(title, body);
+  }
+  /*
    * Triggered for data only payload in foreground
    * */
     const messageListener = firebase.messaging().onMessage(message => {
     //process data message
-    // console.log(JSON.stringify(message))
-    });
-};
+    console.log(JSON.stringify(message));
+  });
+}
 
-getToken = async () => {
-    let fcmToken = await AsyncStorage.getItem('fcmToken');
-    if (!fcmToken) {
-        fcmToken = await firebase.messaging().getToken();
-        if (fcmToken) {
-            // user has a device token
-            console.log(fcmToken);
-            axios({
-                method:'post',
-                url:'http://10.10.80.237:8080/api/registerdevice',
-                data:{
-                    userName:'Ganapati',
-                    deviceId:fcmToken
-                }
-            })
-                .then(res=>console.log(res)).catch(err=>console.log(err))
-            await AsyncStorage.setItem('fcmToken', fcmToken);
-        }
+async function getToken() {
+  let fcmToken = await AsyncStorage.getItem('fcmToken');
+  console.log(fcmToken);
+  if (!fcmToken) {
+    fcmToken = await firebase.messaging().getToken();
+    if (fcmToken) {
+      // user has a device token
+      axios({
+        method: 'post',
+        url: 'http://127.0.0.1:8080/api/registerdevice',
+        data: {
+          userName: 'Ganapati',
+          deviceId: fcmToken,
+        },
+      })
+        .then(res => console.log(res))
+        .catch(err => console.log(err));
+      await AsyncStorage.setItem('fcmToken', fcmToken);
     }
-    
-    console.log('External FCMTOKEN',fcmToken);
+  }
+
+  console.log('External FCMTOKEN', fcmToken);
+}
+function showAlert(title, body) {
+  Alert.alert(title, body, [{ text: 'OK', onPress: () => console.log('OK Pressed') }], { cancelable: false });
 }
 requestPermission = async () => {
     try {
