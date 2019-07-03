@@ -23,7 +23,7 @@ async function createNotificationListeners() {
     showAlert(title, body);
   });
 
-    /*
+  /*
    * If your app is in background, you can listen for when a notification is clicked / tapped / opened as follows:
    * */
   firebase.notifications().onNotificationOpened(function(notificationOpen) {
@@ -31,7 +31,7 @@ async function createNotificationListeners() {
     showAlert(title, body);
   });
 
-    /*
+  /*
    * If your app is closed, you can check if it was opened by a notification being clicked / tapped / opened as follows:
    * */
   let notificationOpen;
@@ -43,7 +43,7 @@ async function createNotificationListeners() {
   /*
    * Triggered for data only payload in foreground
    * */
-    const messageListener = firebase.messaging().onMessage(message => {
+  const messageListener = firebase.messaging().onMessage(message => {
     //process data message
     console.log(JSON.stringify(message));
   });
@@ -76,12 +76,12 @@ function showAlert(title, body) {
   Alert.alert(title, body, [{ text: 'OK', onPress: () => console.log('OK Pressed') }], { cancelable: false });
 }
 requestPermission = async () => {
-    try {
-        await firebase.messaging().requestPermission();
-        // User has authorised
-        getToken();
-    } catch (error) {
+  try {
+    await firebase.messaging().requestPermission();
+    // User has authorised
+    getToken();
+  } catch (error) {
     // User has rejected permissions
     // console.log('permission rejected')
-    }
+  }
 };
