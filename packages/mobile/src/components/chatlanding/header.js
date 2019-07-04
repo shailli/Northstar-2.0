@@ -11,7 +11,7 @@ const ChatHeader=()=>{
                   <Text style={style.leftHeaderContainer}>NorthStar</Text>
             </View>
             <View style={style.rightHeaderContainer}>
-            <TouchableHighlight style={{ height:'100%',width:40,marginRight:7}} onPress={() => console.log("hhhhh")} underlayColor='transparent'>
+            <TouchableHighlight style={{ height:'100%',width:40,marginRight:7}} onPress={() => Actions.files()} underlayColor='transparent'>
                     <Icon style={style.button}
                         raised
                         name='file'

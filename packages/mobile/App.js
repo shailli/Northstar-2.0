@@ -15,6 +15,7 @@ import {
 import {Router, Scene} from 'react-native-router-flux';
 import Chat from './src/components/chatlanding/chat';
 import Camera from './src/components/chatlanding/camara';
+import FileSystem from './src/components/chatlanding/files';
 
 class App extends React.Component {
 
@@ -23,6 +24,7 @@ class App extends React.Component {
       <Scene key="root">
         <Scene key="chat" component={Chat} title="Chat" initial hideBackImage={true}></Scene>
         <Scene key="camera" component={Camera} title="Camera" hideBackImage={true}></Scene>
+        <Scene key="files" component={FileSystem} title="FileSystem" hideBackImage={true}></Scene>
       </Scene>
     </Router>);
   }
