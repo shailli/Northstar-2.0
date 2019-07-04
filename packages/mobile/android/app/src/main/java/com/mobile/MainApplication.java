@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.facebook.react.ReactApplication;
 import io.invertase.firebase.RNFirebasePackage;
+import io.invertase.firebase.storage.RNFirebaseStoragePackage;
 import io.invertase.firebase.messaging.RNFirebaseMessagingPackage;
 import io.invertase.firebase.notifications.RNFirebaseNotificationsPackage;
 import com.facebook.react.ReactNativeHost;
@@ -32,9 +33,10 @@ public class MainApplication extends Application implements ReactApplication {
           new RNFirebasePackage(),
           new RNFirebaseMessagingPackage(),
           new RNFirebaseNotificationsPackage(),
-           new RNFSPackage(),
-            new CameraRollPackage(),
-            new RNCameraPackage()
+          new RNFSPackage(),
+          new CameraRollPackage(),
+          new RNCameraPackage(),
+          new RNFirebaseStoragePackage()
       );
     }
 
