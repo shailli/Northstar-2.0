@@ -21,12 +21,13 @@ import io from 'socket.io-client';
 class Chat extends React.Component {
 state={message:'',
 data:[{userId:'user1',message:'hello'},{userId:'user2',message:'hi, how are you'}],
-socket:io.connect('http://10.10.80.88:8080')}
+socket:io.connect('https://secure-cliffs-60858.herokuapp.com')}
 
   componentDidMount() {
     this.state.socket.emit('user-join');
     
     this.state.socket.on('user-history-chat',(data)=>{
+      console.log("chat history", data);
       this.setState({data});
     });
 
@@ -37,11 +38,15 @@ socket:io.connect('http://10.10.80.88:8080')}
   }
 
   render() {
+    let image=this.props.camaraImage;
+    console.log(image);
     return (<View style={styles.container}>
-      <ChatHeader ></ChatHeader>
-      <ScrollView>
-        <ChatBody  data={this.state.data}></ChatBody>
-      </ScrollView>
+      <ChatHeader socket={this.state.socket}></ChatHeader>
+      <View style={{ height: '75%'}}>
+        <ScrollView >
+          <ChatBody data={this.state.data}></ChatBody>
+        </ScrollView>
+      </View>
       <ChatFooter setTextMessage={(message) =>this.setState({message})} socket={this.state.socket}></ChatFooter>
     </View>);
   }

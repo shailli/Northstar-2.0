@@ -126,7 +126,9 @@ export default class FileSystem extends Component {
       .then(data => {
         console.log('success: ', data);
         console.log(this.state.fileName);
-        Actions.chat({camaraImage: this.state.fileName});
+        this.props.socket.emit('chat-client', {mediaLink:data.downloadURL, userId:'user1',mediaType:'file', mediaName: this.state.fileName});
+        Actions.chat();
+        // Actions.chat({camaraImage: this.state.fileName});
       })
       .catch(error => {console.log('error: ', error)});
     }

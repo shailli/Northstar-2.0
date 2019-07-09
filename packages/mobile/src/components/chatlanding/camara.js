@@ -46,16 +46,17 @@ export default class MyCamara extends Component {
     if (this.camera) {
       const options = { quality: 0.5, base64: true };
       const data = await this.camera.takePictureAsync(options);
-      Actions.chat({camaraImage:data.base64});
+      this.props.socket.emit('chat-client', {message:data.base64, userId:'user1',mediaType:'camera', mediaName: new Date().toISOString()});
+      Actions.chat();
 
-      // var promise = CameraRoll.saveToCameraRoll(data.uri);
-      // promise.then(function(result) {
-      //   console.log('save succeeded ' + result);
-      //   //TODO back to chat page and transfer image data to chat compoent 
+      var promise = CameraRoll.saveToCameraRoll(data.uri);
+      promise.then(function(result) {
+        console.log('save succeeded ' + result);
+        //TODO back to chat page and transfer image data to chat compoent 
         
-      // }).catch(function(error) {
-      //   console.log('save failed ' + error);
-      // });
+      }).catch(function(error) {
+        console.log('save failed ' + error);
+      });
     }
   };
 

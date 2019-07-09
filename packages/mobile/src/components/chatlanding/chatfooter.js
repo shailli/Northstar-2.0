@@ -22,7 +22,7 @@ const ChatFooter = (props) => {
     function sendMessage(){
         console.log(text);
         // props.setTextMessage(text);
-        props.socket.emit('chat-client',{message:text,userId:'user1',isImage:false});
+        props.socket.emit('chat-client',{message:text,userId:'user1'});
         setText('');
     }
     function setMessage(text){
