@@ -2,6 +2,7 @@ import React from 'react';
 import {Text,StyleSheet,View,TouchableHighlight} from 'react-native';
 import { Icon } from 'react-native-elements';
 import {Actions} from 'react-native-router-flux';
+import { DocumentPicker, DocumentPickerUtil } from 'react-native-document-picker';
 
 const ChatHeader=(props)=>{
 
@@ -11,7 +12,7 @@ const ChatHeader=(props)=>{
                   <Text style={style.leftHeaderContainer}>NorthStar</Text>
             </View>
             <View style={style.rightHeaderContainer}>
-            <TouchableHighlight style={{ height:'100%',width:40,marginRight:7}} onPress={() => Actions.files({socket: props.socket})} underlayColor='transparent'>
+            <TouchableHighlight style={{ height:'100%',width:40,marginRight:7}} onPress={() => selectFile(props.socket)} underlayColor='transparent'>
                     <Icon style={style.button}
                         raised
                         name='file'
@@ -68,3 +69,17 @@ const style=StyleSheet.create({
         zIndex:2
     }
 })
+
+const selectFile = (socket) => {
+    DocumentPicker.show({
+        filetype: [DocumentPickerUtil.allFiles()],
+      },(error,res) => {
+        if (res) {
+            let data = {
+                socket: socket,
+                fileRes: res
+            }
+            Actions.files({data: data})
+        }
+    });
+}

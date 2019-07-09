@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View, PermissionsAndroid, FlatList, Button }  from 'react-native';
 import { ListItem } from 'react-native-elements';
-var RNFS = require('react-native-fs');
 import { DocumentPicker, DocumentPickerUtil } from 'react-native-document-picker';
 import firebase from 'react-native-firebase'
 import {Actions} from 'react-native-router-flux';
@@ -12,14 +11,18 @@ export default class FileSystem extends Component {
     selectedFile: {}
   }
 
-    componentDidMount() {      
-      DocumentPicker.show({
-        filetype: [DocumentPickerUtil.allFiles()],
-      },(error,res) => {
-        // Android
-        console.log(res);
-        this.setState({fileName: res.fileName});
-        this.setState({selectedFile: res})
+    componentDidMount() {    
+      if(this.props) {
+        this.setState({fileName: this.props.data.fileRes.fileName});
+        this.setState({selectedFile: this.props.data.fileRes});
+      }  
+      // DocumentPicker.show({
+      //   filetype: [DocumentPickerUtil.allFiles()],
+      // },(error,res) => {
+      //   // Android
+      //   console.log(res);
+      
+        
         // const uri = decodeURIComponent(res.uri);
         // console.log(decodeURIComponent(res.uri));
         // const split = uri.split('/');
@@ -89,7 +92,7 @@ export default class FileSystem extends Component {
         //     console.log(metadata.contentType);
         //     // etc
         // });
-      });
+      // });
     }
 
     requestExternalStoragePermission = async () => {
@@ -111,24 +114,18 @@ export default class FileSystem extends Component {
 
     uploadFile = () => {
       const uri = decodeURIComponent(this.state.selectedFile.uri);
-      console.log(decodeURIComponent(this.state.selectedFile));
       const split = uri.split('/');
       const name = split.pop();
       const inbox = split.pop();
   
-      console.log(name, inbox)
       const ref = firebase.storage().ref(`/random1/${name}`);
-      console.log(ref);
       ref
       .putFile(
         `${firebase.storage.Native.EXTERNAL_STORAGE_DIRECTORY_PATH}/${inbox}/${name}`
       )
       .then(data => {
-        console.log('success: ', data);
-        console.log(this.state.fileName);
-        this.props.socket.emit('chat-client', {mediaLink:data.downloadURL, userId:'user1',mediaType:'file', mediaName: this.state.fileName});
+        this.props.data.socket.emit('chat-client', {mediaLink:data.downloadURL, userId:'user1',mediaType:'file', mediaName: this.state.fileName});
         Actions.chat();
-        // Actions.chat({camaraImage: this.state.fileName});
       })
       .catch(error => {console.log('error: ', error)});
     }

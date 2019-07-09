@@ -106,7 +106,7 @@ const downloadFile = (link) => {
     .storage()
     .refFromURL(link)
     .downloadFile(
-        `${firebase.storage.Native.EXTERNAL_STORAGE_DIRECTORY_PATH}/${fileName}`
+        `${firebase.storage.Native.EXTERNAL_STORAGE_DIRECTORY_PATH}/Download/${fileName}`
     )
     .then(data => {
         console.log(data);
