@@ -27,24 +27,32 @@ const App = () => {
   );
 };
 
-const RootStack = createStackNavigator({
-  ChatListing: {
-    screen: App,
-    navigationOptions: () => ({
-      headerTitleStyle: { fontSize: 18 },
-      headerTintColor: '#fff',
-      headerStyle: {
-        backgroundColor: primary.color,
-      },
-      title: 'NorthStar',
-    }),
-  }
-}, {
-  initialRouteName: 'ChatListing',
-});
+const RootStack = createStackNavigator(
+  {
+    ChatListing: {
+      screen: App,
+      navigationOptions: () => ({
+        headerTitleStyle: { fontSize: 18 },
+        headerTintColor: '#fff',
+        headerStyle: {
+          backgroundColor: primary.color,
+        },
+        title: 'NorthStar',
+      }),
+    },
+  },
+  {
+    initialRouteName: 'ChatListing',
+  },
+);
 
-export default createAppContainer(createSwitchNavigator({
-  Root: RootStack,
-}, {
-  initialRouteName: 'Root',
-}));
+export default createAppContainer(
+  createSwitchNavigator(
+    {
+      Root: RootStack,
+    },
+    {
+      initialRouteName: 'Root',
+    },
+  ),
+);
