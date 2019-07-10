@@ -9,17 +9,15 @@
 /* eslint-disable import/no-unresolved */
 
 import React, { useState, useEffect } from 'react';
-import {
-  StyleSheet, Text, View, TouchableOpacity, AsyncStorage, ScrollView
-} from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, AsyncStorage, ScrollView } from 'react-native';
 import { Router, Scene } from 'react-native-router-flux';
 import Chat from './src/components/chatlanding/chat';
 import Camera from './src/components/chatlanding/camara';
 import FileSystem from './src/components/chatlanding/files';
 
 export default function App() {
-  useEffect(() => {
-    return (
+  useEffect(() => {});
+  return (
     <Router>
       <Scene key="root">
         <Scene key="chat" component={Chat} title="Chat" initial hideBackImage={true}></Scene>
@@ -27,15 +25,13 @@ export default function App() {
         <Scene key="files" component={FileSystem} title="FileSystem" hideBackImage={true}></Scene>
       </Scene>
     </Router>
-);
+  );
 }
-
-export default App;
 
 const styles = StyleSheet.create({
   container: {
     height: '100%',
-    flex: 1
+    flex: 1,
   },
   welcome: {
     fontSize: 20,
@@ -46,16 +42,5 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#333333',
     marginBottom: 5,
-  }
+  },
 });
-
-export default createAppContainer(
-  createSwitchNavigator(
-    {
-      Root: RootStack,
-    },
-    {
-      initialRouteName: 'Root',
-    },
-  ),
-);
