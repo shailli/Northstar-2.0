@@ -11,7 +11,7 @@
 import React, { useEffect } from 'react';
 import { createSwitchNavigator, createStackNavigator, createAppContainer } from 'react-navigation';
 import { View } from 'react-native';
-import { primary } from 'shared';
+import { primary, background } from 'shared';
 import { checkPermission } from './src/components/notifications/notifications';
 import Login from './src/components/login';
 
@@ -21,7 +21,7 @@ const App = () => {
     checkPermission();
   }, []);
   return (
-    <View style={[background, styles.container]}>
+    <View style={[background]}>
       <Login />
     </View>
   );
