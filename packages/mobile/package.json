@@ -6,7 +6,7 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
     "lint": "eslint src",
-    "pretty": "prettier --semi true --print-width 120 --single-quote --trailing-comma all --write \"src/**/*.js\""
+    "pretty": "prettier --semi true --print-width 120 --single-quote --tab-width 4 --trailing-comma none --write \"src/**/*.js\""
   },
   "dependencies": {
     "@react-native-community/cameraroll": "^1.1.1",
@@ -34,6 +34,7 @@
     "@babel/runtime": "^7.4.5",
     "babel-eslint": "^10.0.2",
     "babel-jest": "^24.8.0",
+    "babel-polyfill": "^6.26.0",
     "eslint": "^5.0.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-flowtype": "^2.49.3",
@@ -41,8 +42,8 @@
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-react": "^7.14.0",
     "husky": "^2.5.0",
-    "lint-staged": "^7.2.0",
     "jest": "^24.8.0",
+    "lint-staged": "^7.2.0",
     "metro-react-native-babel-preset": "^0.54.1",
     "prettier": "^1.13.5",
     "react-dom": "^16.8.6",
@@ -50,13 +51,13 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint -- --fix && lint-staged && npm run test"
+      "pre-commit": "npm run lint -- --fix && lint-staged"
     }
   },
   "lint-staged": {
     "*.js": [
       "yarn pretty",
-      "git add"
+      "git add ."
     ]
   }
 }
