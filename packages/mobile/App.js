@@ -16,43 +16,36 @@ import { checkPermission } from './src/components/notifications/notifications';
 import Login from './src/components/login';
 
 const App = () => {
-  // Similar to componentDidMount:
-  useEffect(() => {
-    checkPermission();
-  }, []);
-  return (
-    <View style={[background]}>
-      <Login />
-    </View>
-  );
+    // Similar to componentDidMount:
+    useEffect(() => {
+        checkPermission();
+    }, []);
+    return (
+        <View style={[background]}>
+            <Login />
+        </View>
+    );
 };
 
 const RootStack = createStackNavigator(
-  {
-    ChatListing: {
-      screen: App,
-      navigationOptions: () => ({
-        headerTitleStyle: { fontSize: 18 },
-        headerTintColor: '#fff',
-        headerStyle: {
-          backgroundColor: primary.color,
-        },
-        title: 'NorthStar',
-      }),
+    {
+        ChatListing: {
+            screen: App,
+            navigationOptions: () => ({
+                headerTitleStyle: { fontSize: 18 },
+                headerTintColor: '#fff',
+                headerStyle: {backgroundColor: primary.color},
+                title: 'NorthStar'
+            })
+        }
     },
-  },
-  {
-    initialRouteName: 'ChatListing',
-  },
+      
+    {initialRouteName: 'ChatListing'},
 );
 
 export default createAppContainer(
-  createSwitchNavigator(
-    {
-      Root: RootStack,
-    },
-    {
-      initialRouteName: 'Root',
-    },
-  ),
+    createSwitchNavigator(
+        {Root: RootStack},
+        {initialRouteName: 'Root'},
+    ),
 );
