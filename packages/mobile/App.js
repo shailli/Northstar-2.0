@@ -8,44 +8,42 @@
 
 /* eslint-disable import/no-unresolved */
 
-import React, { useEffect } from 'react';
-import { createSwitchNavigator, createStackNavigator, createAppContainer } from 'react-navigation';
-import { View } from 'react-native';
-import { primary, background } from 'shared';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity, AsyncStorage, ScrollView } from 'react-native';
+import { Router, Scene } from 'react-native-router-flux';
+import Chat from './src/components/chatlanding/chat';
+import Camera from './src/components/chatlanding/camara';
+import FileSystem from './src/components/chatlanding/files';
 import { checkPermission } from './src/components/notifications/notifications';
-import Login from './src/components/login';
 
-const App = () => {
-    // Similar to componentDidMount:
+export default function App() {
     useEffect(() => {
         checkPermission();
-    }, []);
+    });
     return (
-        <View style={[background]}>
-            <Login />
-        </View>
+        <Router>
+            <Scene key="root">
+                <Scene key="chat" component={Chat} title="Chat" initial hideBackImage={true}></Scene>
+                <Scene key="camera" component={Camera} title="Camera" hideBackImage={true}></Scene>
+                <Scene key="files" component={FileSystem} title="FileSystem" hideBackImage={true}></Scene>
+            </Scene>
+        </Router>
     );
-};
+}
 
-const RootStack = createStackNavigator(
-    {
-        ChatListing: {
-            screen: App,
-            navigationOptions: () => ({
-                headerTitleStyle: { fontSize: 18 },
-                headerTintColor: '#fff',
-                headerStyle: {backgroundColor: primary.color},
-                title: 'NorthStar'
-            })
-        }
+const styles = StyleSheet.create({
+    container: {
+        height: '100%',
+        flex: 1
     },
-      
-    {initialRouteName: 'ChatListing'},
-);
-
-export default createAppContainer(
-    createSwitchNavigator(
-        {Root: RootStack},
-        {initialRouteName: 'Root'},
-    ),
-);
+    welcome: {
+        fontSize: 20,
+        textAlign: 'center',
+        margin: 10
+    },
+    instructions: {
+        textAlign: 'center',
+        color: '#333333',
+        marginBottom: 5
+    }
+});

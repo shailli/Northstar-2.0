@@ -1,11 +1,10 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { configure, shallow } from 'enzyme';
 // setup file
-import { configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
+import Login from '.';
 
 configure({ adapter: new Adapter() });
-import Login from '.';
 
 describe('Test case for testing login', () => {
     let wrapper;
