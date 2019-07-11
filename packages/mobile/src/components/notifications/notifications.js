@@ -50,25 +50,25 @@ async function createNotificationListeners() {
 }
 
 async function getToken() {
-  let fcmToken = await AsyncStorage.getItem('fcmToken');
-  console.log(fcmToken);
-  if (!fcmToken) {
-    fcmToken = await firebase.messaging().getToken();
-    if (fcmToken) {
-      // user has a device token
-      axios({
-        method: 'post',
-        url: 'http://127.0.0.1:8080/api/registerdevice',
-        data: {
-          userName: 'Ganapati',
-          deviceId: fcmToken,
-        },
-      })
-        .then(res => console.log(res))
-        .catch(err => console.log(err));
-      await AsyncStorage.setItem('fcmToken', fcmToken);
+          let fcmToken = await AsyncStorage.getItem('fcmToken');
+          console.log(fcmToken);
+          if (!fcmToken) {
+            fcmToken = await firebase.messaging().getToken();
+            if (fcmToken) {
+              // user has a device token
+              axios({
+                method: 'post',
+                url: 'http://127.0.0.1:8080/api/registerdevice',
+                data: {
+                    userName: 'Ganapati',
+                    deviceId: fcmToken
+                }
+            })
+                .then(res => console.log(res))
+                .catch(err => console.log(err));
+            await AsyncStorage.setItem('fcmToken', fcmToken);
+        }
     }
-  }
 
   console.log('External FCMTOKEN', fcmToken);
 }
