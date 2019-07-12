@@ -2,6 +2,7 @@
 import { AsyncStorage, Alert } from 'react-native';
 import firebase from 'react-native-firebase';
 import axios from 'axios';
+import {Actions } from 'react-native-router-flux';
 
 export async function checkPermission() {
     const enabled = await firebase.messaging().hasPermission();
@@ -37,8 +38,12 @@ async function createNotificationListeners() {
     let notificationOpen;
     notificationOpen = await firebase.notifications().getInitialNotification();
     if (notificationOpen) {
+        console.log('this is the function');
         const { title, body } = notificationOpen.notification;
+        // const appUrl=notificationOpen.notification._data.appUrl;
+        // Actions[appUrl]();
         showAlert(title, body);
+        
     }
     /*
      * Triggered for data only payload in foreground
